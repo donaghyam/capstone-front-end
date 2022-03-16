@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react"
-import { useHistory } from "react-router-dom"
+import { useHistory, Link, Route, Router } from "react-router-dom"
 
 export const Register = (props) => {
     const [user, setUser] = useState({})
@@ -50,7 +50,7 @@ export const Register = (props) => {
                                 //with a primary key, and that new object will be sent back
                                 //and stored in local storage - a browser mechanism
                                 localStorage.setItem("garden_user", createdUser.id)
-                                history.push("/")
+                                history.push("/welcome")
                             }
                         })
                 }
@@ -62,8 +62,15 @@ export const Register = (props) => {
 
     const updateUser = (evt) => {
         const copy = {...user}
-        copy[evt.target.id] = evt.target.value
-        setUser(copy)
+        //Check if id matches the id of the name and email fields
+        if (evt.target.id === "name" || evt.target.id === "email"){
+            //If true set 
+            copy[evt.target.id] = evt.target.value
+            setUser(copy)
+        } else {
+            copy[evt.target.id] = parseInt(evt.target.value)
+            setUser(copy)
+        }
     }
 
 
@@ -89,15 +96,19 @@ export const Register = (props) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="zone"> Agricultural Zone </label>
-                    <select onChange={ updateUser }>
+                    <select id ="zoneId" onChange={updateUser}>
+                        <option>Select a zone</option>
                         {zones.map(
                                 zone => 
                                 // When user selects an zone, a brand new object will be created
                                 // this new object will have the id of the selected zone
-                                <option key={`zone--${zone.id}`} value={zone.id}>{zone.id}</option>)
+                                <option key={`zone--${zone.id}`} value={zone.id} id="zoneId">{zone.id}</option>)
                         }
                     </select>
                 </fieldset>
+                <section className="link--register">
+                        <Link to="/map" target="_blank">Not sure what zone you live in?</Link>
+                </section>
                 <fieldset>
                     <button type="submit"> Register </button>
                 </fieldset>

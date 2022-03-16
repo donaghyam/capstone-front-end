@@ -19,7 +19,7 @@ export const Login = () => {
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("garden_user", exists.id)
-                    history.push("/")
+                    history.push("/welcome")
                 } else {
                     existDialog.current.showModal()
                 }
