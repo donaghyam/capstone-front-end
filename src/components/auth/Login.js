@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
+import "./Auth.css"
 
 export const Login = () => {
     const [email, set] = useState("")
@@ -27,17 +28,22 @@ export const Login = () => {
     }
 
     return (
-        <main className="container--login">
+        <main>
             <dialog className="dialog dialog--auth" ref={existDialog}>
                 <div>User does not exist</div>
                 <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
             </dialog>
 
-            <section>
+            <div id="titleContainer">
+                <img id="broccoli" src="https://www.pinclipart.com/picdir/big/540-5403190_broccoli-png-dibujo-de-brocoli-para-colorear-clipart.png" alt="Vegetables Clipart Vegetable Clipart Free Broccoli - Clipart Broccoli@clipartmax.com"></img>
+                <h1 id="title">Gardening</h1>
+                <h1 id="subtitle">With A Growth Mindset</h1>
+                <img id="carrot" src="https://www.pinclipart.com/picdir/big/524-5243910_carrot-pictures-free-clipart-vector-freeuse-carrot-free.png" alt="Reindeer Carrots Icon - Carrots For Reindeer Clipart@clipartmax.com"></img>
+            </div>
+
+            <section className="container--login">
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Gardening</h1>
-                    <h1>With a Growth Mindset</h1>
-                    <h3>Please sign in</h3>
+                    <h1 id="signIn">Please sign in</h1>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
                         <input type="email"
@@ -46,15 +52,15 @@ export const Login = () => {
                             placeholder="Email address"
                             required autoFocus />
                     </fieldset>
-                    <fieldset>
-                        <button type="submit">
+                </form>
+                <div id="loginButtonContainer">
+                        <button type="submit" id="loginButton">
                             Sign in
                         </button>
-                    </fieldset>
-                </form>
-            </section>
-            <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
+                </div>
+                <div id="link--register">
+                    <Link to="/register">Not a member yet?</Link>
+                </div>
             </section>
         </main>
     )

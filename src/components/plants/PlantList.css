@@ -1,0 +1,84 @@
+.mainContainer {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    animation: fadeInAnimation ease 1s
+}
+  
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.addPlantButton {
+    font-size: larger;
+    text-decoration: none;
+    background-color: white;
+    color: #95DBE5FF;
+    border: none;
+    border-radius: 30px;
+    padding: 0.25em 0.75em;
+    transition-duration: 0.4s;
+    font-family: Sontoloyo, sans-serif;
+    font-weight: 300;
+    margin-top: 10px;
+    margin-bottom: 25px;
+  }
+  
+.addPlantButton:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#fruitContainer {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+#vegetableContainer {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+#herbContainer {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+.plant {
+    border-left: 2px solid #339E66FF;
+    border-top: 2px solid #339E66FF;
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid #339E66FF;
+    margin-right: 25px;
+}
+
+#addPlant {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#addPlantLink {
+    text-align: center;
+    font-size: 25px;
+    color: #078282FF;
+}
+
+#addPlantLink:hover {
+    color: white;
+}
+
+

@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom";
+import "./PlantForm.css"
 //The puprose of this module is to be a welcome page for the user
 
 export const AddPlant = () => {
     //zone variable holds initial state
     //setZone() is a function to modify said state
-    const [plant, setPlants] = useState([])
+    const [plants, setPlants] = useState([])
     const [zones, setZones] = useState([])
     const [userZones, setUserZones] = useState([])
+    const [newPlant, setNewPlant] = useState({
+        "name": "",
+        "type": "",
+        "sowingSeason": "",
+        "startIndoors": false,
+        "plantingDepth": "",
+        "sun": "",
+        "watering": "",
+        "soilPH": ""
+    })
+
     const history = useHistory()
 
     useEffect(
@@ -24,53 +36,100 @@ export const AddPlant = () => {
         []
     )
 
+    useEffect(
+        () => {
+            //Get data from API to pull into application state of tickets
+            fetch("http://localhost:8088/plants")
+                //Convert JSON encoded string into Javascript
+                .then(res => res.json())
+                //Invoke setUser() to set value of tickets
+                .then((data) => {
+                    setPlants(data)
+                })
+        },
+        []
+    )
+
     //Write function so the user can input a new plant that's not listed
+    //This function will also create a newPlantZone for each zone selected
     const addNewPlant = (event) => {
 
         event.preventDefault()
 
         //Define variable to store new plant object
-        const newPlant = {
-            "name": plant.name,
-            "type": plant.type,
-            "zoneId": userZones,
-            "sowingSeason": plant.sowingSeason,
+        const newPlantObject = {
+            "name": newPlant.name,
+            "type": newPlant.type,
+            "sowingSeason": newPlant.sowingSeason,
             "startIndoors": false,
-            "plantingDepth": plant.plantingDepth,
-            "sun": plant.sun,
-            "watering": plant.watering,
-            "soilPH": plant.soilPH
+            "plantingDepth": newPlant.plantingDepth,
+            "sun": newPlant.sun,
+            "watering": newPlant.watering,
+            "soilPH": newPlant.soilPH
         }
 
-        
+        alert(`${newPlantObject?.name} sucessfully added.`)
+
+        addNewPlantZone()
+
         //Define variable to send object to API
-        const fetchOption = {
+        const fetchOptionPlant = {
             //Sending an object = POST
             method: "POST",
             headers: {
                 "Content-Type": "application/JSON"
             },
             //Send body of employee form - This must be a string for JSON 
-            body: JSON.stringify(newPlant)
+            body: JSON.stringify(newPlantObject)
         }
 
-        alert(`${newPlant.name} sucessfully added.`)
-
-        return fetch("http://localhost:8088/plants", fetchOption)
-        .then(response => response.json())
-        .then(() => {
-            //Use history mechanism from react-router-dom
-            //This allows us to push to our browser history (this looks like an array method, but is not)
-            //When this triggers, the user will be redirected to the plants page
-            history.push("/plants")
+        return fetch("http://localhost:8088/plants", fetchOptionPlant)
+            .then(response => response.json())
+            .then(() => {
+                //Use history mechanism from react-router-dom
+                //This allows us to push to our browser history (this looks like an array method, but is not)
+                //When this triggers, the user will be redirected to the plants page
+                history.push("/plants")
         })
+
+    }
+
+    const addNewPlantZone = () => {
+
+        const newPlantId = plants.length + 1
+
+        //Create new plantZone for each zone selected
+        const newPlantZoneArray = userZones.map(
+            (zone) => {
+                return {"plantId": newPlantId,
+                        "zoneId": zone.id
+                }
+            }
+        )
+        
+        
+        newPlantZoneArray.forEach(
+            (plantZoneObject) => {
+                const fetchOption = {
+                    //Sending an object = POST
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/JSON"
+                    },
+                    body: JSON.stringify(plantZoneObject)
+                }
+        
+                return fetch("http://localhost:8088/plantZones", fetchOption)
+                    .then(response => response.json())
+            }
+        )
     }
 
     return (
         <>
         {/* The data the user enters will be transient state until the button is clicked and it will be sent to the API */}
         <form className="addPlantForm">
-            <h2 className="addPlantForm__title">Add plant</h2>
+            <h2 id="addPlantForm__title">Add plant</h2>
             {/* Add name */}
             <fieldset>
                 <div className="form-group">
@@ -88,11 +147,11 @@ export const AddPlant = () => {
                                 //Use object spread operator to copy of the current state
                                 //The copy variable will be a brand new object with all of the values
                                 //copied from state
-                                const copy = {...plant}
+                                const copy = {...newPlant}
                                 //Modify the copy and update the name to user input
                                 copy.name = event.target.value
-                                //Make the copy the new state via setPlants() function
-                                setPlants(copy)
+                                //Make the copy the new state via setNewPlant() function
+                                setNewPlant(copy)
                             }
                         } />
                 </div>
@@ -102,12 +161,12 @@ export const AddPlant = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="plantType">Type:</label>
-                    <select id="plantTypeSelectBox" defaultValue={"0"}
+                    <select className="minimal" defaultValue={"0"}
                         onChange={
                             (event) => {
-                                const copy = {...plant}
+                                const copy = {...newPlant}
                                 copy.type = event.target.value
-                                setPlants(copy)
+                                setNewPlant(copy)
                             }
                         }>
                         <option value="0">Select type</option>
@@ -121,17 +180,18 @@ export const AddPlant = () => {
             {/* Select zone(s) */}
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="zone">Zone:</label>
+                    <label htmlFor="zone">Zone(s):</label>
                     {
                         zones.map( 
                             (zone) => {
                                 return <>
-                                    <label htmlFor="zoneCheckbox">{zone.id}</label>
+                                    <label id="zoneCheckboxNumber" htmlFor="zoneCheckbox">{zone.id}</label>
                                     <input type="checkbox" value={zone.id} id="zoneCheckbox"
                                             onChange={
                                                 (event) => {
-                                                    const copy = parseInt(event.target.value)
-                                                    userZones.push(copy)
+                                                    const zone = {"id":""}
+                                                    zone.id = parseInt(event.target.value)
+                                                    userZones.push(zone)
                                                 }
                                             }>
                                     </input>
@@ -146,12 +206,12 @@ export const AddPlant = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="sowingSeason">Sowing season:</label>
-                    <select id="sowingSeasonSelectBox" defaultValue={"0"}
+                    <select className="minimal" defaultValue={"0"}
                         onChange={
                             (event) => {
-                                const copy = {...plant}
+                                const copy = {...newPlant}
                                 copy.sowingSeason = event.target.value
-                                setPlants(copy)
+                                setNewPlant(copy)
                             }
                         }>
                         <option value="0">Select season</option>
@@ -169,9 +229,9 @@ export const AddPlant = () => {
                     <input type="checkbox"
                         onChange={
                             (event) => {
-                                const copy = {...plant}
+                                const copy = {...newPlant}
                                 copy.startIndoors = event.target.checked
-                                setPlants(copy)
+                                setNewPlant(copy)
                             }
                         } />
                 </div>
@@ -181,12 +241,12 @@ export const AddPlant = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="plantingDepth">Planting depth:</label>
-                    <select id="plantingDepthSelectBox" defaultValue={"0"}
+                    <select className="minimal" defaultValue={"0"}
                         onChange={
                             (event) => {
-                                const copy = {...plant}
+                                const copy = {...newPlant}
                                 copy.plantingDepth = event.target.value
-                                setPlants(copy)
+                                setNewPlant(copy)
                             }
                         }>
                         <option value="0">Select depth</option>
@@ -213,15 +273,15 @@ export const AddPlant = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="sun">Sun exposure:</label>
-                    <select id="sunSelectBox" defaultValue={"0"}
+                    <select className="minimal" defaultValue={"0"}
                         onChange={
                             (event) => {
-                                const copy = {...plant}
+                                const copy = {...newPlant}
                                 copy.sun = event.target.value
-                                setPlants(copy)
+                                setNewPlant(copy)
                             }
                         }>
-                        <option value="0">Select depth</option>
+                        <option value="0">Select sun exposure</option>
                         <option value="Shade">Shade</option>
                         <option value="6+ hours">6+ hours</option>
                         <option value="8+ hours">8+ hours</option>
@@ -233,15 +293,15 @@ export const AddPlant = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="watering">Watering:</label>
-                    <select id="wateringSelectBox" defaultValue={"0"}
+                    <select className="minimal" defaultValue={"0"}
                         onChange={
                             (event) => {
-                                const copy = {...plant}
+                                const copy = {...newPlant}
                                 copy.watering = event.target.value
-                                setPlants(copy)
+                                setNewPlant(copy)
                             }
                         }>
-                        <option value="0">Select depth</option>
+                        <option value="0">Select watering amount</option>
                         <option value="0.5 in. per week">0.5 in. per week</option>
                         <option value="1.0 in. per week">1.0 in. per week</option>
                         <option value="1.5 in. per week">1.5 in. per week</option>
@@ -256,16 +316,16 @@ export const AddPlant = () => {
             {/* soil Ph */}
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="soilPH">Soil PH:</label>
-                    <select id="soilPhSelectBox" defaultValue={"0"}
+                    <label htmlFor="soilPH">Soil pH:</label>
+                    <select className="minimal" defaultValue={"0"}
                         onChange={
                             (event) => {
-                                const copy = {...plant}
+                                const copy = {...newPlant}
                                 copy.soilPH = event.target.value
-                                setPlants(copy)
+                                setNewPlant(copy)
                             }
                         }>
-                        <option value="0">Select depth</option>
+                        <option value="0">Select pH</option>
                         <option value="3.0-3.5">3.0-3.5</option>
                         <option value="3.5-4.0">3.5-4.0</option>
                         <option value="4.0-4.5">4.0-4.5</option>
@@ -279,7 +339,7 @@ export const AddPlant = () => {
                 </div>
             </fieldset>
 
-            <button className="btn btn-primary" onClick={addNewPlant}>
+            <button id="addPlantButton" onClick={addNewPlant}>
                 Add plant
             </button>
         </form>

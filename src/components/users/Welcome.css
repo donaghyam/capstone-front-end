@@ -1,0 +1,34 @@
+#welcomeContainer {
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 35px;
+    width: 100%;
+    height: 300px;
+}
+
+#welcomeContainer {
+    height: fit-content;
+    text-align: center;
+    border-top: 2px solid #339E66FF;
+    border-bottom: 2px solid #339E66FF;
+}
+
+#welcomeMessage {
+    font-size: 50px;
+    color: #078282FF;
+    font-family: Sontoloyo, sans-serif;
+
+}
+
+#or {
+    height: fit-content;
+    text-align: center;
+    font-size: 30px;
+    color: #078282FF;
+}
+
+#welcomeLink {
+    height: fit-content;
+    text-align: center;
+    font-size: 30px;
+}
