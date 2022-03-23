@@ -1,7 +1,10 @@
 import React, { useRef, useState, useEffect } from "react"
 import { useHistory, Link, Route, Router } from "react-router-dom"
+import "./Auth.css"
+//This module creates a new user and garden for the user
 
 export const Register = (props) => {
+    const [allUsers, setAllUsers] = useState([])
     const [user, setUser] = useState({})
     const [zones, setZones] = useState([])
     const conflictDialog = useRef()
@@ -17,6 +20,20 @@ export const Register = (props) => {
                 //Send the fetched data to setZones() function
                 .then((data) => {
                     setZones(data)
+                })
+    },
+    []
+    )
+
+    useEffect(
+        () => {
+            //Define function to get zones from API to pull into application state of zones
+            return fetch("http://localhost:8088/users")
+                //Convert JSON encoded string into Javascript
+                .then(response => response.json())
+                //Send the fetched data to setZones() function
+                .then((data) => {
+                    setAllUsers(data)
                 })
     },
     []
@@ -73,17 +90,49 @@ export const Register = (props) => {
         }
     }
 
+    const createGarden = () => {
+        
+        const newUserId = allUsers.length + 1
+        
+
+        const newGardenObject = {
+            "userId": newUserId,
+            "type": ""
+        }
+        
+        //Define variable to send object to API
+        const fetchOption = {
+            //Sending an object = POST
+            method: "POST",
+            headers: {
+                "Content-Type": "application/JSON"
+            },
+            //Send body of employee form - This must be a string for JSON 
+            body: JSON.stringify(newGardenObject)
+        }
+
+        return fetch("http://localhost:8088/gardens", fetchOption)
+            .then(response => response.json())
+    }
+
 
 
     return (
+        
         <main style={{ textAlign: "center" }}>
             <dialog className="dialog dialog--password" ref={conflictDialog}>
                 <div>Account with that email address already exists</div>
                 <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
             </dialog>
+            <div id="titleContainer">
+                <img id="broccoli" src="https://www.pinclipart.com/picdir/big/540-5403190_broccoli-png-dibujo-de-brocoli-para-colorear-clipart.png" alt="Vegetables Clipart Vegetable Clipart Free Broccoli - Clipart Broccoli@clipartmax.com"></img>
+                <h1 id="title">Gardening</h1>
+                <h1 id="subtitle">With A Growth Mindset</h1>
+                <img id="carrot" src="https://www.pinclipart.com/picdir/big/524-5243910_carrot-pictures-free-clipart-vector-freeuse-carrot-free.png" alt="Reindeer Carrots Icon - Carrots For Reindeer Clipart@clipartmax.com"></img>
+            </div>
 
             <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Please Register to start gardening</h1>
+                <h1 className="h3 mb-3 font-weight-normal">Please register to start gardening</h1>
                 <fieldset>
                     <label htmlFor="name"> Full Name </label>
                     <input onChange={updateUser}
@@ -110,7 +159,7 @@ export const Register = (props) => {
                         <Link to="/map" target="_blank">Not sure what zone you live in?</Link>
                 </section>
                 <fieldset>
-                    <button type="submit"> Register </button>
+                    <button type="submit" id="loginButton" onClick={createGarden}> Register </button>
                 </fieldset>
             </form>
         </main>

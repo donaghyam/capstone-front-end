@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import "./Welcome.css"
 
 //The puprose of this module is to be a welcome page for the user
 
 export const Welcome = () => {
-    //users variable holds initial state
-    //setUser() is a function to modify said state
-    const [user, setUser] = useState({})
+    //currentUser variable holds initial state
+    //setCurrentUser() is a function to modify said state
+    const [currentUser, setCurrentUser] = useState([])
 
     //get user from local storage
     const localUser = parseInt(localStorage.getItem("garden_user"))
@@ -21,7 +22,7 @@ export const Welcome = () => {
                 .then(res => res.json())
                 //Invoke setUser() to set value of tickets
                 .then((data) => {
-                    setUser(data)
+                    setCurrentUser(data)
                 })
         },
         //This array isn't watching any state - it runs when the component is rendered, and never again
@@ -31,21 +32,21 @@ export const Welcome = () => {
     return (
         <>
             {/* Display welcome message */}
-            <div>
+            <div id="welcomeContainer">
                 <p id="welcomeMessage">
-                    Welcome, {user.name}
+                    Welcome, {currentUser.name}.
                 </p>
-                <p id="beginGardening">
+                <p id="welcomeLink">
                     <Link to="/plants">
                         Begin gardening
                     </Link>
                 </p>
-                <p>
-                    or
+                <p id="or">
+                    -or-
                 </p>
-                <p id="beginGardening">
+                <p id="welcomeLink">
                     <Link to="/garden">
-                            Enter your existing garden
+                        Enter your existing garden
                     </Link>
                 </p>
             </div>

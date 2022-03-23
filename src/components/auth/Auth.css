@@ -1,0 +1,56 @@
+.container--login {
+    margin-top: 80px;
+    display: flex;
+    border: 2px black dotted;
+    height: 200px;
+}
+
+#signIn {
+    font-size: 30px;
+    text-decoration: none;
+    font-family: Sontoloyo, sans-serif;
+    font-weight: 100;
+    color: #078282FF;
+    display: flex;
+    justify-content: center ;
+}
+
+#loginButton {
+    border: none;
+    border-radius: 30px;
+    background-color: #339E66FF;
+    height: 20px;
+    color: white;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.25em 0.75em;
+    min-width: 10ch;
+    min-height: 44px;
+    transition-duration: 0.4s;
+}
+
+#loginButton:hover {
+    background-color: #95DBE5FF;
+    color: white;
+}
+
+#link--register {
+    height: fit-content;
+}
+
+input {
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+label {
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+#loginButtonContainer {
+    border: 2px black dotted;
+    height: fit-content;
+    display: flex;
+}

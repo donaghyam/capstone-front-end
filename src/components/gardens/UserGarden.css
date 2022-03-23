@@ -1,0 +1,130 @@
+.mainContainer {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    animation: fadeInAnimation ease 1s
+}
+  
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#gardenTitle {
+    border-top: 2px solid #339E66FF;
+    border-bottom: 2px solid #339E66FF;
+    color: #339E66FF;
+    width: 100%;
+    font-size: 30px;
+    font-family: Sontoloyo, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+#frostDateContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#gardenContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+}
+
+#gardenFruitSection {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+#gardenVegetableContainer {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+#gardenHerbContainer {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+.gardenPlant {
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid #339E66FF;
+    margin-right: 25px;
+    margin-top: 20px;
+}
+
+.removePlantButton {
+    font-size: larger;
+    text-decoration: none;
+    background-color: white;
+    color: #95DBE5FF;
+    border: none;
+    border-radius: 30px;
+    padding: 0.25em 0.75em;
+    transition-duration: 0.4s;
+    font-family: Sontoloyo, sans-serif;
+    font-weight: 300;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+  
+.removePlantButton:hover {
+    background-color: red;
+    color: white;
+}
+
+.gardenPlantParameter {
+    display: flex;
+    height: 1px;
+    border-bottom: 2px solid #339E66FF;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    padding-left: 5px;
+}
+
+.gardenPlantParameterData {
+    display: flex;
+    height: 1px;
+    justify-content: right;
+}
+
+#frostDate {
+    border-left: 2px solid #339E66FF;
+    padding: 12px;
+}
+
+.dateInput {
+    height: 1px;
+    border-bottom: 2px solid #339E66FF;
+    margin-top: 5px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: right;
+}
+
+#datePlanted {
+    border-bottom: 2px solid #339E66FF;
+    margin-top: 10px;
+    height: 40px;
+    width: 100%;
+}
+
+#datePlantedLabel {
+    color: #078282FF;
+    height: 1px;
+    margin-top: 10px;
+    display: flex;
+}

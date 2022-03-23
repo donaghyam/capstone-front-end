@@ -1,0 +1,120 @@
+.form-group {
+    border-left: 2px solid #339E66FF;
+    border-top: 2px solid #339E66FF;
+    padding-left: 5px;
+    padding-top: 5px;
+    font-size: large;
+    /* color: #078282FF; */
+}
+
+#addPlantForm__title {
+    border-top: 2px solid #339E66FF;
+    border-bottom: 2px solid #339E66FF;
+    margin-top: 10px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    color: #339E66FF;
+    width: 100%;
+    font-size: 30px;
+    font-family: Sontoloyo, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+label {
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+select {
+
+    /* styling */
+    background-color: white;
+    border: thin solid #078282FF;
+    border-radius: 3px;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    padding: 0.5em 3.5em 0.5em 1em;
+    color: #078282FF;
+  
+    /* reset */
+  
+    margin: 0;      
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  select.minimal {
+    background-image:
+      linear-gradient(45deg, transparent 50%, gray 50%),
+      linear-gradient(135deg, gray 50%, transparent 50%),
+      linear-gradient(to right, #ccc, #ccc);
+    background-position:
+      calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px),
+      calc(100% - 2.5em) 0.5em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+  }
+  
+  select.minimal:focus {
+    background-image:
+      linear-gradient(45deg, #339E66FF 50%, transparent 50%),
+      linear-gradient(135deg, transparent 50%, #339E66FF 50%),
+      linear-gradient(to right, #ccc, #ccc);
+    background-position:
+      calc(100% - 15px) 1em,
+      calc(100% - 20px) 1em,
+      calc(100% - 2.5em) 0.5em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+    border-color: #339E66FF;
+    outline: 0;
+    color: black;
+  }
+  
+  
+  select:-moz-focusring {
+    color: transparent;
+    text-shadow: #4CAF50
+  }
+
+select:hover {
+    background-color: #339E66FF;
+    color: white;
+}
+
+#addPlantButton {
+    font-size: 50px;
+    text-decoration: none;
+    background-color: white;
+    color: #95DBE5FF;
+    border: none;
+    border-radius: 30px;
+    padding: 0.25em 0.75em;
+    transition-duration: 0.4s;
+    font-family: Sontoloyo, sans-serif;
+    font-weight: 300;
+    margin-top: 10px;
+    margin-bottom: 25px;
+  }
+  
+#addPlantButton:hover {
+    background-color: #4CAF50;
+    color: white;
+}
