@@ -65,7 +65,9 @@ export const AddPlant = () => {
             "plantingDepth": newPlant.plantingDepth,
             "sun": newPlant.sun,
             "watering": newPlant.watering,
-            "soilPH": newPlant.soilPH
+            "soilPH": newPlant.soilPH,
+            "daysToHarvest": newPlant.daysToHarvest,
+            "img": newPlant.img
         }
 
         alert(`${newPlantObject?.name} sucessfully added.`)
@@ -336,6 +338,58 @@ export const AddPlant = () => {
                         <option value="6.5-7.0">6.5-7.0</option>
                         <option value="7.0-7.5">7.0-7.5</option>
                     </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="daysToHarvest">Days to harvest:</label>
+                    <input
+                        required autoFocus
+                        type="text"
+                        className="form-control"
+                        //Create an event listner for when state changes
+                        onChange={
+                            //Capture event passed to us as an argument by the browser
+                            (event) => {
+                                //Since you cannot directly modify state in React, 
+                                //you must first copy the existing state.
+                                //Use object spread operator to copy of the current state
+                                //The copy variable will be a brand new object with all of the values
+                                //copied from state
+                                const copy = {...newPlant}
+                                //Modify the copy and update the name to user input
+                                copy.daysToHarvest = parseInt(event.target.value)
+                                //Make the copy the new state via setNewPlant() function
+                                setNewPlant(copy)
+                            }
+                        } />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="imageUrl">Image URL:</label>
+                    <input
+                        required autoFocus
+                        type="text"
+                        className="form-control"
+                        //Create an event listner for when state changes
+                        onChange={
+                            //Capture event passed to us as an argument by the browser
+                            (event) => {
+                                //Since you cannot directly modify state in React, 
+                                //you must first copy the existing state.
+                                //Use object spread operator to copy of the current state
+                                //The copy variable will be a brand new object with all of the values
+                                //copied from state
+                                const copy = {...newPlant}
+                                //Modify the copy and update the name to user input
+                                copy.img = event.target.value
+                                //Make the copy the new state via setNewPlant() function
+                                setNewPlant(copy)
+                            }
+                        } />
                 </div>
             </fieldset>
 

@@ -1,8 +1,24 @@
+
+
 .container--login {
     margin-top: 80px;
-    display: flex;
-    border: 2px black dotted;
     height: 200px;
+}
+
+.form--login {
+    display: flex;
+    flex-direction: column;
+}
+
+#inputContainer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #339E66FF;
+    border-top: 2px solid #339E66FF;
+    border-right: none;
+    border-left: none;
 }
 
 #signIn {
@@ -10,12 +26,20 @@
     text-decoration: none;
     font-family: Sontoloyo, sans-serif;
     font-weight: 100;
+    padding-top: 15px;
+    border-top: 2px solid #339E66FF;
     color: #078282FF;
     display: flex;
     justify-content: center ;
 }
 
+#loginButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
 #loginButton {
+    margin-top: 10px;
     border: none;
     border-radius: 30px;
     background-color: #339E66FF;
@@ -37,6 +61,9 @@
 
 #link--register {
     height: fit-content;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 input {
@@ -50,7 +77,6 @@ label {
 }
 
 #loginButtonContainer {
-    border: 2px black dotted;
     height: fit-content;
     display: flex;
 }

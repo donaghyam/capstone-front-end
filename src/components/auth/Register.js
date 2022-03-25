@@ -96,8 +96,7 @@ export const Register = (props) => {
         
 
         const newGardenObject = {
-            "userId": newUserId,
-            "type": ""
+            "userId": newUserId
         }
         
         //Define variable to send object to API

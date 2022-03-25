@@ -131,7 +131,11 @@ export const Garden = () => {
             //Send body of service ticket request - This must be a string for JSON 
             body: JSON.stringify(updatedGardenPlant)
         })
+        .then(() => 
+            getPlants()
+        )
     }
+
 
     // Function to check whether or not the datePlanted property exists on a gardenPlantObject
     const datePlantedCheck = (currentGardenPlantObject) => {
@@ -153,7 +157,7 @@ export const Garden = () => {
                             <input 
                                 type="date" 
                                 id="datePlanted" 
-                                value="<?php echo date('Y-m-d');?>" 
+                                value="2022-03-24"
                                 min="2022-01-01"
                                 onChange={
                                     (event) => {
@@ -171,19 +175,22 @@ export const Garden = () => {
         //Define variable to store days to harvest
         const daysToHarvest = (parseInt(currentGardenPlantObject.plant.daysToHarvest)) * (1000 * 60 * 60 * 24)
 
-        const datePlanted = parseInt(currentGardenPlantObject.datePlanted)
+        const datePlanted = currentGardenPlantObject.datePlanted
+
+        const dateConverted = +new Date(datePlanted)
 
         //Define variabe to store harvest date
-        const harvestDate = datePlanted + daysToHarvest
+        const harvestDate = dateConverted + daysToHarvest
 
-        const harvestDateHtml =   <div>
+        const harvestDateJsx =   <div>
                                         <p className="gardenPlantParameter">
                                         <b>Estimated harvest date:</b></p>
                                         <p className="gardenPlantParameterData"> {new Date(harvestDate).toDateString()}</p><br></br>
                                     </div>
 
-        return harvestDateHtml
+        return harvestDateJsx
     }
+
 
 
     return (
@@ -210,6 +217,9 @@ export const Garden = () => {
                                 return <div>
                                             <section className="gardenPlant" key={`plant--${gardenPlantObject?.id}`}>
                                                 <p className="gardenPlantParameter"><b>Common name:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.name}</p><br></br>
+                                                <div className="imageContainer">
+                                                    <img className="plantImage" src={gardenPlantObject.plant?.img} alt={gardenPlantObject.plant?.name}></img>
+                                                </div>
                                                 <p className="gardenPlantParameter"><b>Sowing season:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.sowingSeason}</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Start indoors:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.startIndoors ? "✅" : "❌ " }</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Planting depth:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.plantingDepth}</p><br></br>
@@ -237,6 +247,9 @@ export const Garden = () => {
                                 return <div>
                                             <section className="gardenPlant" key={`plant--${gardenPlantObject?.id}`}>
                                                 <p className="gardenPlantParameter"><b>Common name:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.name}</p><br></br>
+                                                <div className="imageContainer">
+                                                    <img className="plantImage" src={gardenPlantObject.plant?.img} alt={gardenPlantObject.plant?.name}></img>
+                                                </div>
                                                 <p className="gardenPlantParameter"><b>Sowing season:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.sowingSeason}</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Start indoors:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.startIndoors ? "✅" : "❌ " }</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Planting depth:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.plantingDepth}</p><br></br>
@@ -264,6 +277,9 @@ export const Garden = () => {
                                 return <div>
                                             <section className="gardenPlant" key={`plant--${gardenPlantObject?.id}`}>
                                                 <p className="gardenPlantParameter"><b>Common name:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.name}</p><br></br>
+                                                <div className="imageContainer">
+                                                    <img className="plantImage" src={gardenPlantObject.plant?.img} alt={gardenPlantObject.plant?.name}></img>
+                                                </div>
                                                 <p className="gardenPlantParameter"><b>Sowing season:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.sowingSeason}</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Start indoors:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.startIndoors ? "✅" : "❌ " }</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Planting depth:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.plantingDepth}</p><br></br>

@@ -29,11 +29,6 @@ export const Login = () => {
 
     return (
         <main>
-            <dialog className="dialog dialog--auth" ref={existDialog}>
-                <div>User does not exist</div>
-                <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
-            </dialog>
-
             <div id="titleContainer">
                 <img id="broccoli" src="https://www.pinclipart.com/picdir/big/540-5403190_broccoli-png-dibujo-de-brocoli-para-colorear-clipart.png" alt="Vegetables Clipart Vegetable Clipart Free Broccoli - Clipart Broccoli@clipartmax.com"></img>
                 <h1 id="title">Gardening</h1>
@@ -41,10 +36,16 @@ export const Login = () => {
                 <img id="carrot" src="https://www.pinclipart.com/picdir/big/524-5243910_carrot-pictures-free-clipart-vector-freeuse-carrot-free.png" alt="Reindeer Carrots Icon - Carrots For Reindeer Clipart@clipartmax.com"></img>
             </div>
 
+            <dialog className="dialog dialog--auth" ref={existDialog}>
+                <div>User does not exist</div>
+                <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
+            </dialog>
+
+
             <section className="container--login">
                 <form className="form--login" onSubmit={handleLogin}>
                     <h1 id="signIn">Please sign in</h1>
-                    <fieldset>
+                    <fieldset id="inputContainer">
                         <label htmlFor="inputEmail"> Email address </label>
                         <input type="email"
                             onChange={evt => set(evt.target.value)}
@@ -54,7 +55,7 @@ export const Login = () => {
                     </fieldset>
                 </form>
                 <div id="loginButtonContainer">
-                        <button type="submit" id="loginButton">
+                        <button type="submit" id="loginButton" onClick={handleLogin}>
                             Sign in
                         </button>
                 </div>

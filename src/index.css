@@ -26,6 +26,11 @@ code {
     monospace;
 }
 
+/* img {
+  width: 200px;
+  max-height: 200px;
+} */
+
 .contentTitles {
   color: #078282FF;
   font-family: Sontoloyo, sans-serif;
