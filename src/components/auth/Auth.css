@@ -1,18 +1,41 @@
+#mainContainerLogin {
+    padding-top: 5px;
+}
 
+#titleContainer {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+}
+
+#title2 {
+    display: flex;
+    flex-direction: column;
+}
 
 .container--login {
-    margin-top: 80px;
+    margin-top: 20px;
     height: 200px;
 }
 
 .form--login {
     display: flex;
     flex-direction: column;
+    animation: fadeInAnimation ease 1s
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 #inputContainer {
     padding-top: 10px;
-    padding-bottom: 10px;
     display: flex;
     justify-content: center;
     border-bottom: 2px solid #339E66FF;
@@ -21,11 +44,13 @@
     border-left: none;
 }
 
+
 #signIn {
     font-size: 30px;
     text-decoration: none;
     font-family: Sontoloyo, sans-serif;
     font-weight: 100;
+    margin-top: 0px;
     padding-top: 15px;
     border-top: 2px solid #339E66FF;
     color: #078282FF;
@@ -61,9 +86,14 @@
 
 #link--register {
     height: fit-content;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+}
+
+#mapLink {
+    display: flex !important;
+    justify-content: center !important;
 }
 
 input {
@@ -71,12 +101,72 @@ input {
     margin-left: 10px;
 }
 
-label {
-    margin-left: 15px;
-    margin-right: 10px;
-}
-
 #loginButtonContainer {
     height: fit-content;
     display: flex;
+}
+
+#registerHeader {
+    font-size: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #339E66FF;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #339E66FF;
+    color: #078282FF;
+    display: flex;
+    justify-content: center ;
+}
+
+.loginFieldset {
+    padding-top: 15px;
+    border: none;
+    
+    justify-content: center;
+    margin-left: 33%;
+    margin-right: 33%;
+}
+
+#nameFieldset{
+    
+    justify-content: center;
+    margin-left: 33%;
+    margin-right: 33%;
+}
+
+#zoneFieldset{
+    
+    margin-left: 33%;
+    margin-right: 33%;
+}
+
+#registerButton {
+    margin-top: 10px;
+    border: none;
+    border-radius: 30px;
+    background-color: #339E66FF;
+    height: 20px;
+    color: white;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.25em 0.75em;
+    min-width: 10ch;
+    min-height: 44px;
+    transition-duration: 0.4s;
+    border-bottom: none;
+}
+
+#registerButton:hover {
+    background-color: #95DBE5FF;
+    color: white;
+}
+
+#registerButtonContainer {
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    border-top: 2px solid #339E66FF;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }

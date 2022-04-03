@@ -131,7 +131,7 @@ export const AddPlant = () => {
         <>
         {/* The data the user enters will be transient state until the button is clicked and it will be sent to the API */}
         <form className="addPlantForm">
-            <h2 id="addPlantForm__title">Add plant</h2>
+            <h2 id="addPlantForm__title">Add new plant</h2>
             {/* Add name */}
             <fieldset>
                 <div className="form-group">
@@ -393,9 +393,11 @@ export const AddPlant = () => {
                 </div>
             </fieldset>
 
-            <button id="addPlantButton" onClick={addNewPlant}>
-                Add plant
-            </button>
+            <div id="addPlantButtonContainer">
+                <button id="addPlantButton" onClick={addNewPlant}>
+                    Add plant
+                </button>
+            </div>
         </form>
         </>
     )

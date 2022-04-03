@@ -19,7 +19,7 @@
 #gardenTitle {
     border-bottom: 2px solid #339E66FF;
     color: #339E66FF;
-    width: 100%;
+    width: 99%;
     font-size: 30px;
     font-family: Sontoloyo, sans-serif;
     display: flex;
@@ -136,13 +136,13 @@
     margin-right: 0px;
     height: 200px;
     width: 100%;
-    align-items: center;
     display: flex;
+    justify-content: center;
 }
 
 .plantImage {
-    margin-left: 30%;
-    margin-right: 20%;
     width: 200px;
-    max-height: 200px;
+    min-height: 200px;
+    display: flex;
+    align-content: center;
 }

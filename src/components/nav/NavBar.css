@@ -1,6 +1,5 @@
 #navContainer {
     padding-left: 20px;
-    padding-right: 20px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -29,6 +28,16 @@
     color: #339E66FF;
 }
 
+#titleLink{
+    display: flex;
+    width: 100%;
+}
+
+#titleLink:hover {
+    background-color: white !important;
+    color: white;
+  }
+
 #subtitle {
     font-size: 50px;
     height: fit-content;
@@ -54,9 +63,9 @@
 #carrot {
    display: flex;
    justify-content: flex-end;
-   height: 160px;
-   width: 120px;
-   padding-top: 15px;
+   height: 165px;
+   width: 105px;
+   padding-top: 12px;
    padding-left: 20px;
    opacity: 70%;
 }

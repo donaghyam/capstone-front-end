@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import "./AllGardens.css"
 
 //The purpose of this module is to display all users gardens
 
@@ -107,10 +108,10 @@ export const AllGardens = () => {
             }
         )
 
-        return <div><h1>Fruit</h1>
+        return <div><h1 className="plantTypeTitles">Fruit</h1>
             {foundUserFruitArray.map(
                 (currentFruit) => {
-                    return <p>{currentFruit.plant?.name}</p>
+                    return <p className="individualPlant">{currentFruit.plant?.name}</p>
                 }
             )}
             </div>
@@ -132,10 +133,10 @@ export const AllGardens = () => {
             }
         )
 
-        return <div><h1>Vegetables</h1>
+        return <div><h1 className="plantTypeTitles">Vegetables</h1>
             {foundUserVegetableArray.map(
                 (currentVegetable) => {
-                    return <p>{currentVegetable.plant?.name}</p>
+                    return <p className="individualPlant">{currentVegetable.plant?.name}</p>
                 }
             )}
             </div>
@@ -157,10 +158,10 @@ export const AllGardens = () => {
             }
         )
 
-        return <div><h1>Herbs</h1>
+        return <div><h1 className="plantTypeTitles">Herbs</h1>
             {foundUserHerbArray.map(
                 (currentHerb) => {
-                    return <p>{currentHerb.plant?.name}</p>
+                    return <p className="individualPlant">{currentHerb.plant?.name}</p>
                 }
             )}
             </div>
@@ -185,10 +186,18 @@ export const AllGardens = () => {
                 (currentUser) => {
                     jsx.push(
                     <div className="individualGarden">
-                        <h1>{currentUser?.name}'s garden</h1>
-                        {userFruitFilter(currentUser)}
-                        {userVegetableFilter(currentUser)}
-                        {userHerbFilter(currentUser)}
+                        <h1 className="userGardenTitle">{currentUser?.name}'s &nbsp;garden</h1>
+                        <div className="plantSectionContainer">
+                            <div className="individualSection">
+                                {userFruitFilter(currentUser)}
+                            </div>
+                            <div className="individualSection">
+                                {userVegetableFilter(currentUser)}
+                            </div>
+                            <div className="individualSection">
+                                {userHerbFilter(currentUser)}
+                            </div>
+                        </div>
                     </div>
                     )
                 }
@@ -199,17 +208,23 @@ export const AllGardens = () => {
                 (currentUser) => {
                     jsx.push(
                     <div className="individualGarden">
-                        <h1>{currentUser?.name}'s garden</h1>
-                        {userFruitFilter(currentUser)}
-                        {userVegetableFilter(currentUser)}
-                        {userHerbFilter(currentUser)}
+                        <h1 className="userGardenTitle">{currentUser?.name}'s &nbsp;garden</h1>
+                        <div className="plantSectionContainer">
+                            <div className="individualSection">
+                                {userFruitFilter(currentUser)}
+                            </div>
+                            <div className="individualSection">
+                                {userVegetableFilter(currentUser)}
+                            </div>
+                            <div className="individualSection">
+                                {userHerbFilter(currentUser)}
+                            </div>
+                        </div>
                     </div>
                     )
                 }
             )
         }
-
-        console.log(jsx)
 
         setGardenToDisplay(jsx)
         
@@ -222,10 +237,11 @@ export const AllGardens = () => {
     return (
         <>
         <div className="mainContainer">
+            <div id="filterContainer">
             <section id="zoneDropdownFilter">
-                <fieldset>
-                    <label htmlFor="zone"> Filter by zone </label>
-                    <select id ="zoneId" onChange={parseEvent}>
+                <fieldset id="zoneFilterFieldset">
+                    <label id="zoneSelectLabel" htmlFor="zone"> Filter by zone </label>
+                    <select className="minimal" onChange={parseEvent}>
                         <option value="0">Select a zone</option>
                         <option value="1" id="zoneId">1</option>
                         <option value="2" id="zoneId">2</option>
@@ -244,7 +260,8 @@ export const AllGardens = () => {
                     </select>
                 </fieldset>
             </section>
-            <section>
+            </div>
+            <section id="allGardens">
                 {
                     gardenToDisplay.map(
                         (garden) => {
