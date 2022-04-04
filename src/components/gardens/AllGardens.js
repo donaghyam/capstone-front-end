@@ -237,7 +237,7 @@ export const AllGardens = () => {
         }
 
         //Add found zone === 0
-        if (filteredUserArray.length === 0){
+        if (filteredUserArray.length === 0 && foundZone.length !== 0 && foundZone !== 14 && foundZone !== 0){
             jsx.push(<p id="noGardenMessage">There aren't any established gardens in Zone {parseInt(foundZone)} yet.</p>)
         }
 

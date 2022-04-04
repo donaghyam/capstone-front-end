@@ -119,7 +119,7 @@ export const Garden = () => {
             "name": gardenPlantObject.plant?.name,
             "plantId": gardenPlantObject?.plantId,
             "gardenId": gardenPlantObject?.gardenId,
-            "datePlanted": Date.parse(event.target.value)
+            "datePlanted": (Date.parse(event.target.value)) + (1000 * 60 * 60 * 24)
         }
 
         // Perform the PUT HTTP request to replace the resource
@@ -158,8 +158,6 @@ export const Garden = () => {
                             <input 
                                 type="date" 
                                 id="datePlanted" 
-                                value="2022-03-24"
-                                min="2022-01-01"
                                 onChange={
                                     (event) => {
                                         addDatePlanted(event, currentGardenPlantObject)
