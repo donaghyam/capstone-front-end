@@ -10,6 +10,7 @@ export const Garden = () => {
     const [gardens, setGarden] = useState([])
     const [gardenPlants, setGardenPlants] = useState([1])
     const [userZone, setUserZone] = useState([])
+    const [currentComment, setComment] = useState([])
 
     const history = useHistory()
 
@@ -118,7 +119,7 @@ export const Garden = () => {
             "name": gardenPlantObject.plant?.name,
             "plantId": gardenPlantObject?.plantId,
             "gardenId": gardenPlantObject?.gardenId,
-            "datePlanted": Date.parse(event.target.value)
+            "datePlanted": (Date.parse(event.target.value)) + (1000 * 60 * 60 * 24)
         }
 
         // Perform the PUT HTTP request to replace the resource
@@ -131,7 +132,11 @@ export const Garden = () => {
             //Send body of service ticket request - This must be a string for JSON 
             body: JSON.stringify(updatedGardenPlant)
         })
+        .then(() => 
+            getPlants()
+        )
     }
+
 
     // Function to check whether or not the datePlanted property exists on a gardenPlantObject
     const datePlantedCheck = (currentGardenPlantObject) => {
@@ -153,8 +158,6 @@ export const Garden = () => {
                             <input 
                                 type="date" 
                                 id="datePlanted" 
-                                value="<?php echo date('Y-m-d');?>" 
-                                min="2022-01-01"
                                 onChange={
                                     (event) => {
                                         addDatePlanted(event, currentGardenPlantObject)
@@ -171,19 +174,90 @@ export const Garden = () => {
         //Define variable to store days to harvest
         const daysToHarvest = (parseInt(currentGardenPlantObject.plant.daysToHarvest)) * (1000 * 60 * 60 * 24)
 
-        const datePlanted = parseInt(currentGardenPlantObject.datePlanted)
+        const datePlanted = currentGardenPlantObject.datePlanted
+
+        const dateConverted = +new Date(datePlanted)
 
         //Define variabe to store harvest date
-        const harvestDate = datePlanted + daysToHarvest
+        const harvestDate = dateConverted + daysToHarvest
 
-        const harvestDateHtml =   <div>
+        const harvestDateJsx =   <div>
                                         <p className="gardenPlantParameter">
                                         <b>Estimated harvest date:</b></p>
                                         <p className="gardenPlantParameterData"> {new Date(harvestDate).toDateString()}</p><br></br>
                                     </div>
 
-        return harvestDateHtml
+        return harvestDateJsx
     }
+
+    //////////////////////////////////////////////////////////////////////////////////
+
+    // Function to check whether or not the comment property exists on a gardenPlantObject
+    const commentCheck = (currentGardenPlantObject) => {
+            
+        //Check if datePlanted property exists on current object
+        if (currentGardenPlantObject.comment){
+            return  <>
+                    <div>
+                    <p className="gardenPlantParameter">
+                        <b>Comments:</b>
+                    </p>
+                    <p className="gardenPlantParameterData"> {currentGardenPlantObject.comment}</p><br></br>
+                    </div>
+                    </>
+        } else {
+            return  <div>
+                        <section className="commentInput">
+                            <label className="commentLabel" htmlFor="comment"><b>Comments:</b></label>
+                            <input
+                                required autoFocus
+                                type="text"
+                                className="form-control"
+                                onChange={
+                                    (event) => {
+                                        const comment = event.target.value
+                                        setComment(comment)
+                                    }
+                        } 
+                        />
+                        <div className="addCommentButtonContainer">
+                        <button className="addCommentButton" onClick={() => {
+                            addComment(currentComment, currentGardenPlantObject)
+                            }}>Add comment
+                        </button>
+                        </div>
+                        </section>
+                    </div>
+        }
+    }
+
+    // Function to add comments to a plant
+    const addComment = (comment, gardenPlantObject) => {
+
+        // Construct a new object to replace the existing one in the API
+        const updatedGardenPlant = {
+            "name": gardenPlantObject.plant?.name,
+            "plantId": gardenPlantObject?.plantId,
+            "gardenId": gardenPlantObject?.gardenId,
+            "datePlanted": gardenPlantObject?.datePlanted,
+            "comment": comment
+        }
+
+        // Perform the PUT HTTP request to replace the resource
+        fetch(`http://localhost:8088/gardenPlants/${gardenPlantObject.id}`, {
+            //PUT method - insert/replace
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            //Send body of service ticket request - This must be a string for JSON 
+            body: JSON.stringify(updatedGardenPlant)
+        })
+        .then(() => 
+            getPlants()
+        )
+    }
+
 
 
     return (
@@ -210,6 +284,9 @@ export const Garden = () => {
                                 return <div>
                                             <section className="gardenPlant" key={`plant--${gardenPlantObject?.id}`}>
                                                 <p className="gardenPlantParameter"><b>Common name:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.name}</p><br></br>
+                                                <div className="imageContainer">
+                                                    <img className="plantImage" src={gardenPlantObject.plant?.img} alt={gardenPlantObject.plant?.name}></img>
+                                                </div>
                                                 <p className="gardenPlantParameter"><b>Sowing season:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.sowingSeason}</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Start indoors:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.startIndoors ? "✅" : "❌ " }</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Planting depth:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.plantingDepth}</p><br></br>
@@ -217,6 +294,7 @@ export const Garden = () => {
                                                 <p className="gardenPlantParameter"><b>Watering:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.watering}</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Soil Ph:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.soilPH}</p><br></br>
                                                 {datePlantedCheck(gardenPlantObject)}
+                                                {commentCheck(gardenPlantObject)}
                                             </section>
                                             <button className="removePlantButton" onClick={() => {
                                                 removePlant(gardenPlantObject.id)
@@ -237,6 +315,9 @@ export const Garden = () => {
                                 return <div>
                                             <section className="gardenPlant" key={`plant--${gardenPlantObject?.id}`}>
                                                 <p className="gardenPlantParameter"><b>Common name:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.name}</p><br></br>
+                                                <div className="imageContainer">
+                                                    <img className="plantImage" src={gardenPlantObject.plant?.img} alt={gardenPlantObject.plant?.name}></img>
+                                                </div>
                                                 <p className="gardenPlantParameter"><b>Sowing season:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.sowingSeason}</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Start indoors:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.startIndoors ? "✅" : "❌ " }</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Planting depth:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.plantingDepth}</p><br></br>
@@ -244,6 +325,7 @@ export const Garden = () => {
                                                 <p className="gardenPlantParameter"><b>Watering:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.watering}</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Soil Ph:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.soilPH}</p><br></br>
                                                 {datePlantedCheck(gardenPlantObject)}
+                                                {commentCheck(gardenPlantObject)}
                                             </section>
                                             <button className="removePlantButton" onClick={() => {
                                                 removePlant(gardenPlantObject.id)
@@ -264,6 +346,9 @@ export const Garden = () => {
                                 return <div>
                                             <section className="gardenPlant" key={`plant--${gardenPlantObject?.id}`}>
                                                 <p className="gardenPlantParameter"><b>Common name:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.name}</p><br></br>
+                                                <div className="imageContainer">
+                                                    <img className="plantImage" src={gardenPlantObject.plant?.img} alt={gardenPlantObject.plant?.name}></img>
+                                                </div>
                                                 <p className="gardenPlantParameter"><b>Sowing season:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.sowingSeason}</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Start indoors:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.startIndoors ? "✅" : "❌ " }</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Planting depth:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.plantingDepth}</p><br></br>
@@ -271,6 +356,7 @@ export const Garden = () => {
                                                 <p className="gardenPlantParameter"><b>Watering:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.watering}</p><br></br>
                                                 <p className="gardenPlantParameter"><b>Soil Ph:</b></p> <p className="gardenPlantParameterData"> {gardenPlantObject.plant?.soilPH}</p><br></br>
                                                 {datePlantedCheck(gardenPlantObject)}
+                                                {commentCheck(gardenPlantObject)}
                                             </section>
                                             <button className="removePlantButton" onClick={() => {
                                                 removePlant(gardenPlantObject.id)

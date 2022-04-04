@@ -96,8 +96,7 @@ export const Register = (props) => {
         
 
         const newGardenObject = {
-            "userId": newUserId,
-            "type": ""
+            "userId": newUserId
         }
         
         //Define variable to send object to API
@@ -119,33 +118,36 @@ export const Register = (props) => {
 
     return (
         
-        <main style={{ textAlign: "center" }}>
+        <main className="mainContainerLogin">
             <dialog className="dialog dialog--password" ref={conflictDialog}>
                 <div>Account with that email address already exists</div>
                 <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
             </dialog>
             <div id="titleContainer">
-                <img id="broccoli" src="https://www.pinclipart.com/picdir/big/540-5403190_broccoli-png-dibujo-de-brocoli-para-colorear-clipart.png" alt="Vegetables Clipart Vegetable Clipart Free Broccoli - Clipart Broccoli@clipartmax.com"></img>
+            <img id="broccoli" src="https://www.pinclipart.com/picdir/big/540-5403190_broccoli-png-dibujo-de-brocoli-para-colorear-clipart.png" alt="Vegetables Clipart Vegetable Clipart Free Broccoli - Clipart Broccoli@clipartmax.com"></img>
+                <div id="title2">
                 <h1 id="title">Gardening</h1>
                 <h1 id="subtitle">With A Growth Mindset</h1>
-                <img id="carrot" src="https://www.pinclipart.com/picdir/big/524-5243910_carrot-pictures-free-clipart-vector-freeuse-carrot-free.png" alt="Reindeer Carrots Icon - Carrots For Reindeer Clipart@clipartmax.com"></img>
-            </div>
+                </div>
+                <img id="carrot" src="https://www.pinclipart.com/picdir/big/524-5243910_carrot-pictures-free-clipart-vector-freeuse-carrot-free.png" alt="Reindeer Carrots Icon - Carrots For Reindeer Clipart@clipartmax.com"></img>            </div>
 
             <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Please register to start gardening</h1>
-                <fieldset>
-                    <label htmlFor="name"> Full Name </label>
+                <h1 id="registerHeader">Please register to start gardening</h1>
+                <fieldset id="nameFieldset">
+                    <label htmlFor="name"> Name </label>
                     <input onChange={updateUser}
                            type="text" id="name" className="form-control"
                            placeholder="Enter your name" required autoFocus />
                 </fieldset>
-                <fieldset>
+                <fieldset className="loginFieldset">
+                    <div id="registerLabelContainer"></div>
                     <label htmlFor="email"> Email address </label>
                     <input onChange={updateUser} type="email" id="email" className="form-control" placeholder="Email address" required />
                 </fieldset>
-                <fieldset>
+                <fieldset id="zoneFieldset">
+                <div id="registerLabelContainer"></div>
                     <label htmlFor="zone"> Agricultural Zone </label>
-                    <select id ="zoneId" onChange={updateUser}>
+                    <select className ="minimal" onChange={updateUser}>
                         <option>Select a zone</option>
                         {zones.map(
                                 zone => 
@@ -156,10 +158,10 @@ export const Register = (props) => {
                     </select>
                 </fieldset>
                 <section className="link--register">
-                        <Link to="/map" target="_blank">Not sure what zone you live in?</Link>
+                        <Link to="/map" target="_blank" id="mapLink">Not sure what zone you live in?</Link>
                 </section>
-                <fieldset>
-                    <button type="submit" id="loginButton" onClick={createGarden}> Register </button>
+                <fieldset id="registerButtonContainer">
+                    <button type="submit" id="registerButton" onClick={createGarden}> Register </button>
                 </fieldset>
             </form>
         </main>

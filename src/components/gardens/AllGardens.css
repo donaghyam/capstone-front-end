@@ -1,0 +1,99 @@
+.mainContainer {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    animation: fadeInAnimation ease 1s;
+}
+  
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#filterContainer {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#zoneDropdownFilter {
+    display: flex;
+    justify-content: center;
+}
+
+#allGardens {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 20%;
+    padding-left: 20%;
+}
+
+.individualGarden {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.userGardenTitle {
+    color: #339E66FF;
+    font-family: Sontoloyo, sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.plantTypeTitles {
+    border-bottom: 2px solid #339E66FF;
+    color: #078282FF;
+    font-family: Sontoloyo, sans-serif;
+    font-weight: 100;
+    font-size:x-large;
+    padding-left: 10px;
+}
+
+.plantSectionContainer {
+    display: flex;
+}
+
+.individualSection {
+    border-left: 2px solid #339E66FF;
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+.individualPlant {
+    padding-left: 10px;
+}
+
+#zoneSelectLabel {
+    display: flex;
+    width: 200px;
+    padding-bottom: 20px;
+    padding-left: 18px;
+}
+
+#zoneFilterFieldset {
+    margin-left: 0px !important;
+    padding-left: 0px !important;
+}
+
+.userComment {
+    padding-left: 20px;
+}
+
+#noGardenMessage {
+    display: flex;
+    justify-content: center;
+    padding-right: 30px;
+}

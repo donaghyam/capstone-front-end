@@ -206,6 +206,9 @@ export const Plants = () => {
                                             <p className="plant" key={`plant--${plantObject?.id}`}>
                                                 {plantObject?.name}<br></br>
                                             </p>
+                                            <div className="imageContainer">
+                                                <img className="plantImage" src={plantObject?.img} alt={plantObject?.name}></img>
+                                            </div>
                                             <button className="addPlantButton" onClick={() => addPlantToGarden(plantObject)}>
                                                 <b>+ </b>Add to garden
                                             </button>
@@ -225,6 +228,9 @@ export const Plants = () => {
                                             <p className="plant" key={`plant--${plantObject?.id}`}>
                                                 {plantObject?.name}<br></br>
                                             </p>
+                                            <div className="imageContainer">
+                                                <img className="plantImage" src={plantObject?.img} alt={plantObject?.name}></img>
+                                            </div>
                                             <button className="addPlantButton" onClick={() => addPlantToGarden(plantObject)}>
                                                 <b>+ </b>Add to garden
                                             </button>
@@ -244,6 +250,9 @@ export const Plants = () => {
                                             <p className="plant" key={`plant--${plantObject?.id}`}>
                                                 {plantObject?.name}<br></br>
                                             </p>
+                                            <div className="imageContainer">
+                                                <img className="plantImage" src={plantObject?.img} alt={plantObject?.name}></img>
+                                            </div>
                                             <button className="addPlantButton" onClick={() => addPlantToGarden(plantObject)}>
                                                 <b>+ </b>Add to garden
                                             </button>

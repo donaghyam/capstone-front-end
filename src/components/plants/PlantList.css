@@ -63,6 +63,7 @@
     flex-direction: column;
     border-left: 2px solid #339E66FF;
     margin-right: 25px;
+    padding-left: 5px;
 }
 
 #addPlant {
