@@ -111,7 +111,8 @@ export const AllGardens = () => {
         return <div><h1 className="plantTypeTitles">Fruit</h1>
             {foundUserFruitArray.map(
                 (currentFruit) => {
-                    return <p className="individualPlant">{currentFruit.plant?.name}</p>
+                    return <div><p className="individualPlant"><b>{currentFruit.plant?.name}</b></p>
+                            {commentParagraphAddition(currentFruit)}</div>
                 }
             )}
             </div>
@@ -136,7 +137,8 @@ export const AllGardens = () => {
         return <div><h1 className="plantTypeTitles">Vegetables</h1>
             {foundUserVegetableArray.map(
                 (currentVegetable) => {
-                    return <p className="individualPlant">{currentVegetable.plant?.name}</p>
+                    return <div><p className="individualPlant"><b>{currentVegetable.plant?.name}</b></p>
+                            {commentParagraphAddition(currentVegetable)}</div>
                 }
             )}
             </div>
@@ -161,17 +163,25 @@ export const AllGardens = () => {
         return <div><h1 className="plantTypeTitles">Herbs</h1>
             {foundUserHerbArray.map(
                 (currentHerb) => {
-                    return <p className="individualPlant">{currentHerb.plant?.name}</p>
+                    return <div><p className="individualPlant"><b>{currentHerb.plant?.name}</b></p>
+                            {commentParagraphAddition(currentHerb)}</div>
                 }
             )}
             </div>
 
     }
 
+    const commentParagraphAddition = (currentPlant) => {
+        if (currentPlant.comment){
+            return <p className="userComment">Comments: {currentPlant.comment}</p>
+        }
+    }
+
 
     //This function checks if the user selected a zone from the dropdown
     const filterCheck = (foundZone) => {
 
+        //filter users in selected zone
         const filteredUserArray = users.filter(
             (currentUser) => {
                 return currentUser?.zoneId === foundZone
@@ -186,7 +196,7 @@ export const AllGardens = () => {
                 (currentUser) => {
                     jsx.push(
                     <div className="individualGarden">
-                        <h1 className="userGardenTitle">{currentUser?.name}'s &nbsp;garden</h1>
+                        <h1 className="userGardenTitle">{currentUser?.name}'s &nbsp;garden in Zone {currentUser?.zoneId}</h1>
                         <div className="plantSectionContainer">
                             <div className="individualSection">
                                 {userFruitFilter(currentUser)}
@@ -226,13 +236,16 @@ export const AllGardens = () => {
             )
         }
 
+        //Add found zone === 0
+        if (filteredUserArray.length === 0){
+            jsx.push(<p id="noGardenMessage">There aren't any established gardens in Zone {parseInt(foundZone)} yet.</p>)
+        }
+
+
         setGardenToDisplay(jsx)
         
     }
 
-    // const defaultGardenList = () => {
-
-    // }
 
     return (
         <>

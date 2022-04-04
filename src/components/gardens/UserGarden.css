@@ -93,6 +93,7 @@
     margin-bottom: 10px;
     margin-top: 0px;
     padding-left: 5px;
+    
 }
 
 .gardenPlantParameterData {
@@ -138,6 +139,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-bottom: 10px;
 }
 
 .plantImage {
@@ -145,4 +147,48 @@
     min-height: 200px;
     display: flex;
     align-content: center;
+}
+
+.commentInput {
+    display: flex;
+    height: 1px;
+    border-top: 2px solid #339E66FF;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    padding-left: 5px;
+    padding-top: 5px;
+    height: 22px;
+}
+
+.addCommentButtonContainer{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.addCommentButton {
+    border: none;
+    border-radius: 30px;
+    background-color: #339E66FF;
+    color: white;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.25em 0.75em;
+    min-width: 10ch;
+    min-height: 25px;
+    transition-duration: 0.4s;
+}
+
+.addCommentButton:hover {
+    background-color: #95DBE5FF;
+    color: white;
+}
+
+.commentLabel {
+    margin-bottom: 10px;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding-left: 0px;
+
 }

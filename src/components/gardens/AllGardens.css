@@ -88,3 +88,12 @@
     padding-left: 0px !important;
 }
 
+.userComment {
+    padding-left: 20px;
+}
+
+#noGardenMessage {
+    display: flex;
+    justify-content: center;
+    padding-right: 30px;
+}
