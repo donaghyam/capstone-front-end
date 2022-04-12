@@ -14,11 +14,11 @@ This application was created to simplify and organize gardening plants. The user
 <p align="left">If you would like to play around with this project, you can follow these instructions to download it and test it out on your local machine:</p>
 
 <ul align="left">
-  <li>Clone this repo</li>
-  <li>In the database directory run json-server database.json -p 8088 -w</li>
-  <li>Open a different terminal window or tab and navigate to the project directory</li>
-  <li>In the project directory run npm start</li>
-  <li>In a browser, open localhost:3000 and you should see the app running.</li>
+  <li align="left">Clone this repo</li>
+  <li align="left">In the database directory run json-server database.json -p 8088 -w</li>
+  <li align="left">Open a different terminal window or tab and navigate to the project directory</li>
+  <li align="left">In the project directory run npm start</li>
+  <li align="left">In a browser, open localhost:3000 and you should see the app running.</li>
 </ul>
 
 <br></br>
