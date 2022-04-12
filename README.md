@@ -1,7 +1,6 @@
 <h1 align="center">Gardening With A Growth Mindset</h1>
 <h3 align="center">Front-End Capstone Project</h3>
 
-<h3 align="left">Connect with me:</h3>
 <p align="left">
 This application was created to simplify and organize gardening plants. The user is show a list of plants based on what agricultural zone they live in. Plants can be added to the user’s garden, where they can see their selected plants and each plant’s growing specifications. The user may also add any plants missing from the database. This application has full CRUD capability (React, API fetch calls, React-Routing, and JSON server).
 </p>
