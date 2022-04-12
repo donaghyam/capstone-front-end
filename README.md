@@ -13,7 +13,7 @@ This application was created to simplify and organize gardening plants. The user
 <h3 align="left">How to install and run this project</h3>
 <p align="left">If you would like to play around with this project, you can follow these instructions to download it and test it out on your local machine:</p>
 
-<ul>
+<ul align="left">
   <li>Clone this repo</li>
   <li>In the database directory run json-server database.json -p 8088 -w</li>
   <li>Open a different terminal window or tab and navigate to the project directory</li>
