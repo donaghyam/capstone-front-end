@@ -84,18 +84,6 @@ export const Register = (props) => {
             })
     }
 
-    const updateUser = (evt) => {
-        const copy = {...user}
-        //Check if id matches the id of the name and email fields
-        if (evt.target.id === "name" || evt.target.id === "email" || evt.target.id === "zoneId"){
-            //If true set 
-            copy[evt.target.id] = evt.target.value
-            setUser(copy)
-        } else {
-            copy[evt.target.id] = parseInt(evt.target.value)
-            setUser(copy)
-        }
-    }
 
     const createGarden = () => {
         
