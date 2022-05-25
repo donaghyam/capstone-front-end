@@ -5,7 +5,14 @@ import "./Auth.css"
 
 export const Register = (props) => {
     const [allUsers, setAllUsers] = useState([])
-    const [user, setUser] = useState({})
+    
+    // Establish user object with necessary keys
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        zoneId: 0
+    })
+
     const [zones, setZones] = useState([])
     const conflictDialog = useRef()
 
@@ -80,7 +87,7 @@ export const Register = (props) => {
     const updateUser = (evt) => {
         const copy = {...user}
         //Check if id matches the id of the name and email fields
-        if (evt.target.id === "name" || evt.target.id === "email"){
+        if (evt.target.id === "name" || evt.target.id === "email" || evt.target.id === "zoneId"){
             //If true set 
             copy[evt.target.id] = evt.target.value
             setUser(copy)
@@ -135,22 +142,37 @@ export const Register = (props) => {
                 <h1 id="registerHeader">Please register to start gardening</h1>
                 <fieldset id="nameFieldset">
                     <label htmlFor="name"> Name </label>
-                    <input onChange={updateUser}
+                    <input onChange={(evt) => {
+                        const copy = { ...user}
+                        copy.name = evt.target.value
+                        setUser(copy)
+                    }
+                    }
                            type="text" id="name" className="form-control"
                            placeholder="Enter your name" required autoFocus />
                 </fieldset>
                 <fieldset className="loginFieldset">
                     <div id="registerLabelContainer"></div>
                     <label htmlFor="email"> Email address </label>
-                    <input onChange={updateUser} type="email" id="email" className="form-control" placeholder="Email address" required />
+                    <input onChange={(evt) => {
+                        const copy = { ...user}
+                        copy.email = evt.target.value
+                        setUser(copy)
+                    }
+                    } type="email" id="email" className="form-control" placeholder="Email address" required />
                 </fieldset>
                 <fieldset id="zoneFieldset">
                 <div id="registerLabelContainer"></div>
                     <label htmlFor="zone"> Agricultural Zone </label>
-                    <select className ="minimal" onChange={updateUser}>
+                    <select className ="minimal" onChange={(evt) => {
+                        const copy = { ...user}
+                        copy.zoneId = parseInt(evt.target.value)
+                        setUser(copy)
+                    }
+                    }>
                         <option>Select a zone</option>
                         {zones.map(
-                                zone => 
+                                (zone) => 
                                 // When user selects an zone, a brand new object will be created
                                 // this new object will have the id of the selected zone
                                 <option key={`zone--${zone.id}`} value={zone.id} id="zoneId">{zone.id}</option>)
